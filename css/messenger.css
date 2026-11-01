@@ -1,13 +1,17 @@
-/* Мессенджер внутри сайта: плавающая кнопка, выезжающая панель, страница #/messenger */
+/* Мессенджер внутри сайта: плавающая кнопка, выезжающая панель, страница #/messenger
+   Tech & Glassmorphism Edition */
 .fab {
-  position: fixed; right: 22px; bottom: 22px; z-index: 60;
-  width: 56px; height: 56px; border-radius: 50%; border: 0; cursor: pointer;
+  position: fixed; right: 24px; bottom: 24px; z-index: 60;
+  width: 58px; height: 58px; border-radius: 50%; border: 0; cursor: pointer;
   display: grid; place-items: center; color: #fff;
-  background: linear-gradient(135deg, #4f9dff, #b07cff);
-  box-shadow: 0 10px 28px rgba(90, 100, 255, .4);
-  transition: transform .2s, box-shadow .2s;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease;
 }
-.fab:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 14px 34px rgba(90, 100, 255, .5); }
+.fab:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 16px 38px rgba(99, 102, 241, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
 .fab-i { grid-area: 1 / 1; display: grid; place-items: center; transition: opacity .2s, transform .2s; }
 .fab svg { width: 26px; height: 26px; }
 .fab .chat svg { fill: #fff; }
@@ -19,34 +23,44 @@
 .fab.is-open .nbadge { display: none; }
 .is-msgr .fab { display: none; }
 
-/* Общая рамка: по умолчанию спрятана (но iframe живёт — сессия и звонок не теряются) */
+/* Общая рамка: по умолчанию спрятана */
 .msgr {
   position: fixed; z-index: 55; display: flex; flex-direction: column; overflow: hidden;
-  right: 22px; bottom: 92px; width: 420px; height: 640px;
-  max-height: calc(100dvh - var(--hdr) - 112px); max-width: calc(100vw - 44px);
-  background: var(--card); border: 1px solid var(--line2); border-radius: 18px; box-shadow: var(--shadow);
+  right: 24px; bottom: 96px; width: 420px; height: 650px;
+  max-height: calc(100dvh - var(--hdr) - 116px); max-width: calc(100vw - 48px);
+  background: var(--card2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--line2); border-radius: 20px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), var(--glass-highlight);
   opacity: 0; visibility: hidden; pointer-events: none;
-  transform: translateY(16px) scale(.98); transform-origin: bottom right;
-  transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
+  transform: translateY(18px) scale(.98); transform-origin: bottom right;
+  transition: opacity .22s cubic-bezier(0.16, 1, 0.3, 1),
+              transform .22s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear .22s;
 }
 .msgr.open {
   opacity: 1; visibility: visible; pointer-events: auto; transform: none;
-  transition: opacity .22s ease, transform .22s ease, visibility 0s;
+  transition: opacity .22s cubic-bezier(0.16, 1, 0.3, 1),
+              transform .22s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s;
 }
 @media (prefers-reduced-motion: reduce) { .msgr, .msgr.open, .fab, .fab-i { transition: none; } }
 
 .msgr-bar {
-  flex: none; display: flex; align-items: center; gap: 4px; height: 44px; padding: 0 6px 0 16px;
-  border-bottom: 1px solid var(--line); background: var(--bg2); font-size: 14px;
+  flex: none; display: flex; align-items: center; gap: 6px; height: 46px; padding: 0 8px 0 16px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--card2) 90%, transparent);
+  font-size: 14px; font-weight: 600;
 }
 .msgr-bar .sp { flex: 1; }
 .msgr-btn {
-  width: 34px; height: 34px; border: 0; border-radius: 9px; background: transparent; color: var(--muted);
-  display: grid; place-items: center; cursor: pointer;
+  width: 34px; height: 34px; border: 0; border-radius: 10px; background: transparent; color: var(--muted);
+  display: grid; place-items: center; cursor: pointer; transition: all .15s;
 }
-.msgr-btn:hover { background: var(--card2); color: var(--text); }
+.msgr-btn:hover { background: var(--card); color: var(--text); }
 .msgr-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.msgr-body { flex: 1; min-height: 0; background: #111217; }
+.msgr-body { flex: 1; min-height: 0; background: #090a10; }
 .msgr-body iframe { display: block; width: 100%; height: 100%; border: 0; }
 
 /* Страница #/messenger: на всю высоту под шапкой, без подвала */
@@ -61,7 +75,7 @@
 .is-msgr #app { min-height: calc(100dvh - var(--hdr)); }
 
 @media (max-width: 759px) {
-  .fab { right: 16px; bottom: 16px; }
-  .to-top { right: 80px; bottom: 22px; }
-  .toasts { bottom: 86px; }
+  .fab { right: 18px; bottom: 18px; }
+  .to-top { right: 84px; bottom: 24px; }
+  .toasts { bottom: 88px; }
 }

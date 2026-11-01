@@ -1,44 +1,82 @@
-/* Светлая тема. Включается атрибутом <html data-theme="light"> (см. index.html и js/ui.js).
-   Цвета текста подобраны с контрастом ≥ 4.5:1 к фону карточек и страницы. */
+/* Светлая тема CISOFT — Frosted Glassmorphism Edition
+   Включается атрибутом <html data-theme="light"> (см. index.html и js/ui.js).
+   Контраст текста ≥ 4.5:1, приятные стеклянные полупрозрачные поверхности. */
 :root[data-theme="light"] {
-  --bg: #f4f5f9;
-  --bg2: #e9ebf2;
-  --card: #ffffff;
-  --card2: #eceef5;
-  --line: #d9dde7;
-  --line2: #b9c0d0;
-  --text: #171a23;
-  --muted: #555d70;
-  --accent: #2563d8;
-  --accent2: #7b3fe4;
-  --link: #1f5bc9;
-  --good: #137a41;
-  --warn: #8a5300;
-  --head-bg: rgba(255, 255, 255, .86);
-  --shadow: 0 18px 50px rgba(20, 30, 60, .18);
-  --b-sys: #1f5bc9;
-  --b-games: #137a41;
-  --b-config: #8a5300;
-  --b-media: #b4134f;
-  --b-social: #1f5bc9;
-  --b-admin: #08707e;
-  --b-android: #137a41;
-  --b-vpn: #1f5bc9;
-  --b-other: #6a2fd0;
+  --bg: #f5f7fb;
+  --bg2: #ebf0f8;
+  --card: rgba(255, 255, 255, 0.76);
+  --card2: rgba(240, 244, 252, 0.82);
+  --card-hover: rgba(255, 255, 255, 0.96);
+  --line: rgba(15, 23, 42, 0.08);
+  --line2: rgba(15, 23, 42, 0.14);
+  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+  --text: #0f172a;
+  --muted: #58657d;
+
+  --accent: #4f46e5;
+  --accent2: #9333ea;
+  --accent-cyan: #0891b2;
+  --link: #4338ca;
+  --link-hover: #312e81;
+  --good: #059669;
+  --warn: #d97706;
+  --danger: #e11d48;
+
+  --head-bg: rgba(255, 255, 255, 0.78);
+  --head-border: rgba(15, 23, 42, 0.07);
+  --shadow: 0 18px 45px -10px rgba(15, 23, 42, 0.12);
+  --shadow-card: 0 4px 18px rgba(15, 23, 42, 0.05);
+
+  --b-sys: #4338ca;
+  --b-games: #059669;
+  --b-config: #d97706;
+  --b-media: #db2777;
+  --b-social: #0284c7;
+  --b-admin: #0891b2;
+  --b-android: #16a34a;
+  --b-vpn: #4f46e5;
+  --b-other: #7e22ce;
+
   color-scheme: light;
 }
-:root[data-theme="light"] .badge { background: color-mix(in srgb, currentColor 11%, transparent); }
-:root[data-theme="light"] .card:hover { box-shadow: 0 6px 20px rgba(20, 30, 60, .08); }
-:root[data-theme="light"] .note { background: #fff7e8; border-color: #f0d199; }
-:root[data-theme="light"] .lightbox { background: rgba(10, 12, 20, .88); }
 
-/* Переключатель: в тёмной теме показываем солнце (перейти к светлой), в светлой — луну */
+:root[data-theme="light"] body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--accent) 7%, transparent) 0%, transparent 45%),
+    radial-gradient(circle at 82% 22%, color-mix(in srgb, var(--accent2) 6%, transparent) 0%, transparent 50%),
+    radial-gradient(circle at 50% 85%, color-mix(in srgb, var(--accent-cyan) 4%, transparent) 0%, transparent 45%);
+}
+
+:root[data-theme="light"] ::-webkit-scrollbar-track { background: var(--bg); }
+:root[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--line2) 90%, transparent);
+  border: 2px solid var(--bg);
+}
+:root[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+:root[data-theme="light"] .card:hover {
+  box-shadow: 0 16px 36px -8px rgba(79, 70, 229, 0.18),
+              0 2px 10px rgba(15, 23, 42, 0.05),
+              var(--glass-highlight);
+}
+
+:root[data-theme="light"] .note {
+  background: rgba(254, 243, 199, 0.7);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #78350f;
+}
+
+:root[data-theme="light"] .lightbox { background: rgba(10, 12, 22, 0.88); }
+
+/* Переключатель тем: иконка луны/солнца */
 .theme-btn .i-moon { display: none; }
 :root[data-theme="light"] .theme-btn .i-sun { display: none; }
 :root[data-theme="light"] .theme-btn .i-moon { display: block; }
 
-/* Плавная смена темы (кроме тех, кто просил меньше анимаций) */
+/* Плавный переход при смене темы */
 @media (prefers-reduced-motion: no-preference) {
-  body, .top, .card, .chip, .dl, .feature, .foot { transition: background-color .2s, border-color .2s, color .2s; }
-  .card { transition: transform .15s, border-color .15s, box-shadow .15s, background-color .2s; }
+  body, .top, .card, .chip, .dl, .feature, .foot {
+    transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+  }
 }

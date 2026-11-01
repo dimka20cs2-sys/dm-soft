@@ -1,108 +1,189 @@
-/* Главная: витрины, Minecraft, игры, Pro, «Почему», обновления, FAQ, финальный призыв */
+/* Главная: витрины, Minecraft, игры, Pro, «Почему», обновления, FAQ, финальный призыв
+   Tech & Glassmorphism Edition */
 .h-show {
-  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 44px; align-items: center;
-  margin-top: 72px; padding: 40px; border-radius: 24px; border: 1px solid var(--line);
+  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: center;
+  margin-top: 80px; padding: 44px; border-radius: 26px;
   background:
-    radial-gradient(500px 300px at 100% 0%, color-mix(in srgb, var(--accent2) 12%, transparent), transparent 70%),
+    radial-gradient(600px 350px at 100% 0%, color-mix(in srgb, var(--accent2) 16%, transparent), transparent 70%),
+    radial-gradient(500px 300px at 0% 100%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
     var(--card);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--line2);
+  box-shadow: var(--shadow-card), var(--glass-highlight);
 }
 .h-show.h-rev { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
 .h-show.h-rev .h-show-img { order: -1; }
-.h-show.h-msgr { background: radial-gradient(500px 300px at 0% 100%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%), var(--card); }
-.h-show h2 { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; letter-spacing: -.6px; margin: 12px 0 10px; }
-.h-show-text > p { color: var(--muted); margin: 0; font-size: 15.5px; }
-.h-tag {
-  display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .3px; padding: 3px 11px; border-radius: 99px;
-  color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, transparent);
+.h-show.h-msgr {
+  background:
+    radial-gradient(600px 350px at 0% 100%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
+    radial-gradient(500px 300px at 100% 0%, color-mix(in srgb, var(--accent-cyan) 14%, transparent), transparent 70%),
+    var(--card);
 }
-.h-checks { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 9px; }
-.h-checks li { position: relative; padding-left: 30px; font-size: 15px; }
+.h-show h2 { font-size: clamp(28px, 3.6vw, 38px); line-height: 1.15; letter-spacing: -.8px; font-weight: 800; margin: 14px 0 12px; }
+.h-show-text > p { color: var(--muted); margin: 0; font-size: 16px; line-height: 1.6; }
+.h-tag {
+  display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .4px; padding: 4px 12px; border-radius: 99px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  backdrop-filter: blur(8px);
+}
+.h-checks { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 11px; }
+.h-checks li { position: relative; padding-left: 32px; font-size: 15px; }
 .h-checks li::before {
-  content: "✓"; position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 50%;
+  content: "✓"; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%;
   display: grid; place-items: center; font-size: 12px; font-weight: 800; color: #fff;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 40%, transparent);
 }
-.h-show-img { display: block; border-radius: 14px; overflow: hidden; border: 1px solid var(--line2); box-shadow: var(--shadow); background: var(--card2); }
-.h-show-img img { width: 100%; transition: transform .4s; }
-.h-show-img:hover img { transform: scale(1.02); }
+.h-show-img {
+  display: block; border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--line2); box-shadow: var(--shadow); background: var(--card2);
+}
+.h-show-img img { width: 100%; display: block; transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1); }
+.h-show-img:hover img { transform: scale(1.025); }
 
-/* мини-карточки программ (LAN/VPN, Minecraft) */
-.h-minis { display: grid; gap: 12px; margin-top: 22px; }
+/* Мини-карточки софта */
+.h-minis { display: grid; gap: 12px; margin-top: 24px; }
 .h-mini {
-  display: flex; gap: 14px; align-items: center; padding: 14px; border-radius: 14px; color: var(--text);
-  background: var(--bg2); border: 1px solid var(--line); transition: border-color .15s, transform .15s;
+  display: flex; gap: 15px; align-items: center; padding: 15px 18px; border-radius: 16px; color: var(--text);
+  background: var(--card);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  box-shadow: var(--glass-highlight);
+  transition: all .2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.h-mini:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-2px); }
+.h-mini:hover {
+  text-decoration: none;
+  background: var(--card-hover);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line2));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -4px color-mix(in srgb, var(--accent) 20%, transparent), var(--glass-highlight);
+}
 .h-mini span { display: flex; flex-direction: column; min-width: 0; }
-.h-mini b { font-size: 15.5px; }
+.h-mini b { font-size: 16px; font-weight: 700; letter-spacing: -.2px; }
 .h-mini small { color: var(--muted); font-size: 13.5px; line-height: 1.45; }
-.h-mc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.h-mc .h-mini { background: var(--card); padding: 18px; align-items: flex-start; }
+.h-mc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.h-mc .h-mini { padding: 20px; align-items: flex-start; }
 
-/* игры */
-.h-games { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+/* Карточки игр */
+.h-games { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .h-game {
-  display: flex; flex-direction: column; gap: 4px; color: var(--text); padding: 10px 10px 16px;
-  background: var(--card); border: 1px solid var(--line); border-radius: 18px; transition: transform .15s, border-color .15s;
+  display: flex; flex-direction: column; gap: 6px; color: var(--text); padding: 12px 12px 18px;
+  background: var(--card);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid var(--line); border-radius: 20px;
+  box-shadow: var(--shadow-card), var(--glass-highlight);
+  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), border-color .25s ease, box-shadow .25s ease;
 }
-.h-game:hover { text-decoration: none; transform: translateY(-3px); border-color: var(--gc, var(--accent)); }
-.h-cover { position: relative; display: block; border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 9; margin-bottom: 8px; background: var(--card2); }
-.h-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.h-game:hover {
+  text-decoration: none;
+  transform: translateY(-4px);
+  border-color: var(--gc, var(--accent));
+  box-shadow: 0 16px 36px -8px color-mix(in srgb, var(--gc, var(--accent)) 28%, transparent), var(--glass-highlight);
+}
+.h-cover { position: relative; display: block; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; margin-bottom: 10px; background: var(--card2); }
+.h-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1); }
 .h-game:hover .h-cover img { transform: scale(1.05); }
 .h-cover em {
-  position: absolute; left: 12px; bottom: 12px; font-style: normal; font-weight: 700; font-size: 13.5px; color: #fff;
-  padding: 6px 14px; border-radius: 99px; background: rgba(10, 12, 20, .65); backdrop-filter: blur(6px);
+  position: absolute; left: 12px; bottom: 12px; font-style: normal; font-weight: 700; font-size: 13px; color: #fff;
+  padding: 6px 14px; border-radius: 99px;
+  background: rgba(10, 12, 22, 0.72);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 .h-game b, .h-game small { padding: 0 6px; }
-.h-game b { font-size: 17px; }
+.h-game b { font-size: 17.5px; font-weight: 700; letter-spacing: -.2px; }
 .h-game small { color: var(--muted); font-size: 13.5px; line-height: 1.45; }
 
 /* Pro: шаги */
-.h-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: s; }
-.h-steps li { position: relative; padding: 22px 20px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); }
+.h-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; counter-reset: s; }
+.h-steps li {
+  position: relative; padding: 24px 22px; border-radius: 18px;
+  background: var(--card);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card), var(--glass-highlight);
+  transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1), border-color .2s;
+}
+.h-steps li:hover { transform: translateY(-3px); border-color: var(--line2); }
 .h-steps li:not(:last-child)::after {
-  content: ""; position: absolute; top: 40px; right: -14px; width: 14px; height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: .6;
+  content: ""; position: absolute; top: 42px; right: -16px; width: 16px; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: .7;
 }
 .h-step {
-  display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; margin-bottom: 14px;
-  font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; margin-bottom: 16px;
+  font-weight: 800; color: #fff; font-size: 15px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 45%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
-.h-steps b { font-size: 16px; }
-.h-steps p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.h-steps b { font-size: 16.5px; font-weight: 700; letter-spacing: -.2px; }
+.h-steps p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
 
 /* Почему CISOFT */
-.h-why { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
-.h-why > div { padding: 20px 18px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); }
-.h-why-i {
-  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; font-size: 22px; margin-bottom: 12px;
-  background: color-mix(in srgb, var(--accent) 12%, var(--card2));
+.h-why { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.h-why > div {
+  padding: 22px 20px; border-radius: 18px;
+  background: var(--card);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card), var(--glass-highlight);
+  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), border-color .25s ease;
 }
-.h-why b { font-size: 15.5px; }
-.h-why p { margin: 6px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+.h-why > div:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 35%, var(--line2)); }
+.h-why-i {
+  display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; font-size: 22px; margin-bottom: 14px;
+  background: color-mix(in srgb, var(--accent) 15%, var(--card2));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.h-why b { font-size: 16px; font-weight: 700; letter-spacing: -.2px; }
+.h-why p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 
-/* последние обновления */
-.h-upd { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
-.h-upd-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px; color: var(--text); }
+/* Последние обновления */
+.h-upd {
+  background: var(--card);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+  box-shadow: var(--shadow-card), var(--glass-highlight);
+}
+.h-upd-row { display: flex; align-items: center; gap: 16px; padding: 15px 20px; color: var(--text); transition: background-color .15s; }
 .h-upd-row + .h-upd-row { border-top: 1px solid var(--line); }
-.h-upd-row:hover { text-decoration: none; background: var(--card2); }
-.h-upd-row .icon { width: 42px; height: 42px; border-radius: 11px; }
+.h-upd-row:hover { text-decoration: none; background: var(--card-hover); }
+.h-upd-row .icon { width: 44px; height: 44px; border-radius: 12px; }
 .h-upd-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.h-upd-body em { font-style: normal; font-weight: 600; font-size: 12.5px; color: var(--accent); margin-left: 4px; }
+.h-upd-body em { font-style: normal; font-weight: 700; font-size: 12.5px; color: var(--accent); margin-left: 6px; }
 .h-upd-body small { color: var(--muted); font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.h-upd-row time { color: var(--muted); font-size: 13px; flex: none; }
+.h-upd-row time { color: var(--muted); font-size: 13px; flex: none; font-weight: 500; }
 
 /* FAQ */
-.h-faq .faq { max-width: none; padding-bottom: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; align-items: start; }
+.h-faq .faq { max-width: none; padding-bottom: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; align-items: start; }
 
-/* финальный призыв */
+/* Финальный призыв */
 .h-final {
-  position: relative; isolation: isolate; overflow: hidden; text-align: center; margin: 80px 0 30px; padding: 56px 24px;
-  border-radius: 26px; border: 1px solid var(--line2); background: var(--card);
+  position: relative; isolation: isolate; overflow: hidden; text-align: center;
+  margin: 90px 0 36px; padding: 64px 28px;
+  border-radius: 28px;
+  background:
+    radial-gradient(700px 350px at 50% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 75%),
+    radial-gradient(500px 300px at 50% 100%, color-mix(in srgb, var(--accent2) 20%, transparent), transparent 75%),
+    var(--card);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--line2);
+  box-shadow: var(--shadow), var(--glass-highlight);
 }
 .h-final .h-bg { inset: 0; }
-.h-final h2 { font-size: clamp(26px, 3.6vw, 38px); letter-spacing: -.6px; margin: 0 0 10px; line-height: 1.15; }
-.h-final p { color: var(--muted); margin: 0 auto; max-width: 520px; font-size: 16px; }
+.h-final h2 {
+  font-size: clamp(28px, 3.8vw, 42px); font-weight: 800; letter-spacing: -.8px;
+  margin: 0 0 12px; line-height: 1.15;
+}
+.h-final p { color: var(--muted); margin: 0 auto; max-width: 540px; font-size: 16.5px; line-height: 1.6; }
 .h-final .h-cta { justify-content: center; }
 
 @media (max-width: 1000px) {
@@ -113,21 +194,21 @@
   .h-steps li::after { display: none; }
 }
 @media (max-width: 860px) {
-  .h-show, .h-show.h-rev { grid-template-columns: minmax(0, 1fr); padding: 26px; gap: 26px; }
+  .h-show, .h-show.h-rev { grid-template-columns: minmax(0, 1fr); padding: 28px; gap: 28px; }
   .h-show .h-show-img, .h-show.h-rev .h-show-img { order: 0; }
   .h-games { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
   .h-faq .faq { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 560px) {
-  .h-show { margin-top: 56px; padding: 20px; border-radius: 20px; }
+  .h-show { margin-top: 56px; padding: 22px; border-radius: 20px; }
   .h-mc-grid { grid-template-columns: minmax(0, 1fr); }
-  .h-steps { gap: 10px; }
-  .h-steps li { padding: 16px 14px; }
+  .h-steps { gap: 12px; }
+  .h-steps li { padding: 18px 16px; }
   .h-why > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .h-why { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .h-why > div { padding: 16px 14px; grid-column: auto; }
+  .h-why > div { padding: 18px 16px; grid-column: auto; }
   .h-why > div:nth-child(n+4) { grid-column: auto; }
-  .h-upd-row { padding: 12px 14px; }
+  .h-upd-row { padding: 14px 16px; }
   .h-upd-row time { display: none; }
-  .h-final { padding: 40px 18px; margin-top: 60px; }
+  .h-final { padding: 44px 20px; margin-top: 64px; }
 }
