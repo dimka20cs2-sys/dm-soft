@@ -17,7 +17,9 @@
   (function () {
     var t = null;
     try { t = localStorage.getItem("ci-theme"); } catch (e) {}
-    if (t !== "light" && t !== "dark") t = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    if (t !== "light" && t !== "dark" && t !== "indigo" && t !== "purple") {
+      t = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    }
     document.documentElement.setAttribute("data-theme", t);
   })();
 </script>
@@ -52,10 +54,20 @@
       <span>Мессенджер</span><b class="nbadge" data-unread hidden></b>
     </a>
     <div class="acc-slot" id="acc-slot"></div>
-    <button class="theme-btn" id="theme-btn" type="button" aria-label="Сменить тему" title="Сменить тему">
-      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2 6 6M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
-    </button>
+    <div class="theme-slot" id="theme-slot">
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Выбрать тему" title="Выбрать тему" aria-expanded="false" aria-haspopup="true">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2 6 6M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+        <svg class="i-indigo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+        <svg class="i-purple" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </button>
+      <div class="theme-menu" id="theme-menu" hidden role="menu" aria-label="Темы оформления">
+        <button type="button" role="menuitem" data-theme-val="dark"><span class="t-dot t-dark"></span><span>Тёмная</span><svg class="t-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+        <button type="button" role="menuitem" data-theme-val="light"><span class="t-dot t-light"></span><span>Светлая</span><svg class="t-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+        <button type="button" role="menuitem" data-theme-val="indigo"><span class="t-dot t-indigo"></span><span>Индиго</span><svg class="t-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+        <button type="button" role="menuitem" data-theme-val="purple"><span class="t-dot t-purple"></span><span>Фиолетовый</span><svg class="t-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+      </div>
+    </div>
   </div>
 </header>
 

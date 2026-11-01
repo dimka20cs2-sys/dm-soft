@@ -28,23 +28,79 @@
     });
   };
 
-  // ── тема: сохранённая или системная ──
+  // ── тема: сохранённая или системная (dark, light, indigo, purple) ──
   var meta = document.querySelector('meta[name="theme-color"]');
   var sys = window.matchMedia ? matchMedia("(prefers-color-scheme: light)") : null;
-  function saved() { try { return localStorage.getItem("ci-theme"); } catch (e) { return null; } }
-  function apply(t) {
-    root.setAttribute("data-theme", t);
-    if (meta) meta.setAttribute("content", t === "light" ? "#f5f6fa" : "#111217");
-    var btn = document.getElementById("theme-btn");
-    btn.setAttribute("title", t === "light" ? "Тёмная тема" : "Светлая тема");
-    btn.setAttribute("aria-label", t === "light" ? "Включить тёмную тему" : "Включить светлую тему");
+  var validThemes = ["dark", "light", "indigo", "purple"];
+  function saved() {
+    try {
+      var t = localStorage.getItem("ci-theme");
+      if (validThemes.indexOf(t) !== -1) return t;
+    } catch (e) {}
+    return null;
   }
-  apply(root.getAttribute("data-theme") === "light" ? "light" : "dark");
-  document.getElementById("theme-btn").onclick = function () {
-    var t = root.getAttribute("data-theme") === "light" ? "dark" : "light";
-    try { localStorage.setItem("ci-theme", t); } catch (e) {}
-    apply(t);
-  };
+  function themeMetaColor(t) {
+    if (t === "light") return "#f5f7fb";
+    if (t === "indigo") return "#060814";
+    if (t === "purple") return "#0b0714";
+    return "#090a10";
+  }
+  function apply(t) {
+    if (validThemes.indexOf(t) === -1) t = "dark";
+    root.setAttribute("data-theme", t);
+    if (meta) meta.setAttribute("content", themeMetaColor(t));
+    var btn = document.getElementById("theme-btn");
+    var titles = {
+      dark: "Тёмная тема",
+      light: "Светлая тема",
+      indigo: "Тема Индиго",
+      purple: "Фиолетовая тема"
+    };
+    if (btn) {
+      btn.setAttribute("title", titles[t] || "Выбрать тему");
+      btn.setAttribute("aria-label", titles[t] || "Выбрать тему");
+    }
+    var menu = document.getElementById("theme-menu");
+    if (menu) {
+      menu.querySelectorAll("[data-theme-val]").forEach(function (b) {
+        b.classList.toggle("active", b.getAttribute("data-theme-val") === t);
+      });
+    }
+  }
+
+  var curTheme = saved();
+  if (!curTheme) {
+    curTheme = sys && sys.matches ? "light" : "dark";
+  }
+  apply(curTheme);
+
+  var themeBtn = document.getElementById("theme-btn");
+  var themeMenu = document.getElementById("theme-menu");
+  if (themeBtn && themeMenu) {
+    themeBtn.onclick = function (e) {
+      e.stopPropagation();
+      var open = !themeMenu.hidden;
+      themeMenu.hidden = open;
+      themeBtn.setAttribute("aria-expanded", String(!open));
+    };
+    themeMenu.querySelectorAll("[data-theme-val]").forEach(function (b) {
+      b.onclick = function (e) {
+        e.stopPropagation();
+        var val = b.getAttribute("data-theme-val");
+        try { localStorage.setItem("ci-theme", val); } catch (err) {}
+        apply(val);
+        themeMenu.hidden = true;
+        themeBtn.setAttribute("aria-expanded", "false");
+      };
+    });
+    document.addEventListener("click", function (e) {
+      if (!themeMenu.hidden && !themeMenu.contains(e.target) && e.target !== themeBtn) {
+        themeMenu.hidden = true;
+        themeBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
   if (sys) {
     var onSys = function () { if (!saved()) apply(sys.matches ? "light" : "dark"); };
     if (sys.addEventListener) sys.addEventListener("change", onSys); else if (sys.addListener) sys.addListener(onSys);
